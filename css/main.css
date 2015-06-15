@@ -6474,6 +6474,10 @@ div#viewport {
 }
 #omnigroup {
   margin: auto 25px;
+  width: auto;
+}
+.omni-input {
+  width: 400px !important;
 }
 img#logo {
   padding: 5px;

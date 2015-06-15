@@ -34,9 +34,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 col-md-offset-4 text-center">
+                        <div class=" text-center">
                             <div class="input-group" id="omnigroup">
-                            <input type="text" class="form-control typeahead" placeholder="Search for NASDAQ Tickers...">
+                            <input type="text" class="form-control omni-input typeahead" placeholder="Search for NASDAQ Tickers...">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" id="button-go">Go!</button>
                                 </span>
@@ -57,49 +57,59 @@
 		<script src="js/typeahead/typeahead.bundle.js"></script>
 		<script src="js/typeahead/typeahead.jquery.js"></script>		
 		<script>
-			var substringMatcher = function(strs) {
-			  return function findMatches(q, cb) {
-				var matches, substringRegex;
-			 
-				// an array that will be populated with substring matches
-				matches = [];
-			 
-				// regex used to determine if a string contains the substring `q`
-				substrRegex = new RegExp(q, 'i');
-			 
-				// iterate through the pool of strings and for any string that
-				// contains the substring `q`, add it to the `matches` array
-				$.each(strs, function(i, str) {
-				  if (substrRegex.test(str)) {
-					matches.push(str);
-				  }
-				});
-			 
-				cb(matches);
-			  };
-			};
-			/*var tickers = (function () {
-				var json = null;
-				$.ajax({
-					'url': 'data/nasdaqlisted.json',
-					'dataType': "json",
-					'success': function (data) {
-						json = data;
-					}
-				});
-				return json;
-			})(); 
-			*/
-			var tickers = $.getJSON("data/nasdaqlisted.json");
-			$('#omnigroup .typeahead').typeahead({
-			  hint: true,
-			  highlight: true,
-			  minLength: 11}
-			,
-			{
-				name: 'tickers',
-				source: substringMatcher(tickers)
-			});
-		</script>
+            var substringMatcher = function (strs, listLength) {
+                return function findMatches(q, cb) {
+                    var matches, substrRegexStartsWith, substrRegexContains;
+
+                    // an array that will be populated with substring matches
+                    matches = [];
+
+                    // regex used to determine if a string contains the substring `q`
+                    substrRegexStartsWith = new RegExp("(^" + q + ")", 'i');
+                    substrRegexContains = new RegExp("(^.*"+q+".*$)", 'i');
+
+                    // iterate through the pool of strings and for any string that
+                    // contains the substring `q`, add it to the `matches` array
+
+                    var count = 0;
+                    var str = null;
+
+                    strs.responseJSON.forEach(function(obj) {
+                        if (count >= listLength) {return;}
+
+                        str = obj["Symbol"]+" | "+obj["Security Name"];
+                        if (substrRegexStartsWith.test(obj["Symbol"]) && matches.indexOf(str) == -1) {
+                            matches.push(str);
+                            count++;
+                        }
+                     });
+
+                    strs.responseJSON.forEach(function(obj) {
+                        if (count >= listLength) {return;}
+
+                        str = obj["Symbol"]+" | "+obj["Security Name"];
+                        if (substrRegexContains.test(str) && matches.indexOf(str) == -1) {
+                            matches.push(str);
+                            count++;
+                        }
+                    });
+                    cb(matches);
+                };
+            };
+
+            var dropdownLength = 5;
+            var tickers = $.getJSON("data/nasdaqlisted.json");
+
+            $('.typeahead').typeahead({
+                        hint: true,
+                        highlight: true,
+                        minLength: 1}
+                    ,
+                    {
+                        name: 'tickers',
+                        limit: 30,
+                        source: substringMatcher(tickers,dropdownLength)
+                    });
+        </script>
     </body>
 </html>
