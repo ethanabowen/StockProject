@@ -62,6 +62,6 @@ function SubstringMatcher (strs, ddLen, eLen) {
                 return trimmed.substr(0, eLen) + "...";
             } else return trimmed;
         }
-        cb(matches);
+        cb(matches.slice(0,ddLen));
     }
 }

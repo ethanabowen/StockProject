@@ -434,29 +434,49 @@ fieldset[disabled] .twitter-typeahead .tt-input {
   padding:0;
 }
 .tt-suggestion{
-  background-color: #ffffff;
-  padding: 5px 10px;
   margin-top: 0;
-  .box-shadow(none);
   .transition(all, 0.08s, ease-in-out);
   cursor: pointer;
   line-height: 22px;
   font-size: 14px; //Controls the font size for the drop down menu items.
+  & {
+    .box-shadow(none);
+    background-color: #ffffff;
+    padding: 5px 10px;
+  }
+  &:first-child{
+    margin-top: 0;
+  }
+  &:nth-child(2n){
+    background-color: #f8f8f8;
+    &:hover{
+      background-color: fadeout(@focus-color,75%);
+    }
+  }
+  &:hover{
+    .box-shadow(inset 4px 0 0 0 @focus-color,inset -4px 0 0 0 @focus-color);
+    background-color: fadeout(@focus-color,75%);
+    padding: 5px 10px 5px 15px;
+  }
 }
-.tt-suggestion:hover{
+.tt-cursor, .tt-cursor:nth-child(2n){
   .box-shadow(inset 4px 0 0 0 @focus-color,inset -4px 0 0 0 @focus-color);
   background-color: fadeout(@focus-color,75%);
   padding: 5px 10px 5px 15px;
+  .transition();
 }
-.tt-suggestion:first-child{
-  margin-top: 0;
-}
-.tt-suggestion:nth-child(2n){
-  background-color: #f8f8f8;
-}
-.tt-suggestion:nth-child(2n):hover{
-  background-color: fadeout(@focus-color,75%);
-}
+//.tt-suggestion:hover, .tt-cursor{
+//  .box-shadow(inset 4px 0 0 0 @focus-color,inset -4px 0 0 0 @focus-color);
+//  background-color: fadeout(@focus-color,75%);
+//  padding: 5px 10px 5px 15px;
+//}
+//
+//.tt-suggestion:nth-child(2n){
+//  background-color: #f8f8f8;
+//}
+//.tt-suggestion:nth-child(2n):hover{
+//  background-color: fadeout(@focus-color,75%);
+//}
 .tt-empty{}
 .tt-open{}
 .tt-cursor{}

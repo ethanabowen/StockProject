@@ -24142,13 +24142,5 @@
     "Test Issue":"Y",
     "Financial Status":"N",
     "Round Lot Size":100
-  },
-  {
-    "Symbol":"File Creation Time: 0612201521:32",
-    "Security Name":"",
-    "Market Category":"",
-    "Test Issue":"",
-    "Financial Status":"",
-    "Round Lot Size":null
   }
 ]

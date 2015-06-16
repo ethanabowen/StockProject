@@ -6724,12 +6724,7 @@ fieldset[disabled] .twitter-typeahead .tt-input {
   padding: 0;
 }
 .tt-suggestion {
-  background-color: #ffffff;
-  padding: 5px 10px;
   margin-top: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
   -webkit-transition: all 0.08s ease-in-out;
   -moz-transition: all 0.08s ease-in-out;
   -o-transition: all 0.08s ease-in-out;
@@ -6738,13 +6733,11 @@ fieldset[disabled] .twitter-typeahead .tt-input {
   cursor: pointer;
   line-height: 22px;
   font-size: 14px;
-}
-.tt-suggestion:hover {
-  -webkit-box-shadow: inset 4px 0 0 0 #66afe9, inset -4px 0 0 0 #66afe9;
-  -moz-box-shadow: inset 4px 0 0 0 #66afe9, inset -4px 0 0 0 #66afe9;
-  box-shadow: inset 4px 0 0 0 #66afe9, inset -4px 0 0 0 #66afe9;
-  background-color: rgba(102, 175, 233, 0.25);
-  padding: 5px 10px 5px 15px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-color: #ffffff;
+  padding: 5px 10px;
 }
 .tt-suggestion:first-child {
   margin-top: 0;
@@ -6754,6 +6747,26 @@ fieldset[disabled] .twitter-typeahead .tt-input {
 }
 .tt-suggestion:nth-child(2n):hover {
   background-color: rgba(102, 175, 233, 0.25);
+}
+.tt-suggestion:hover {
+  -webkit-box-shadow: inset 4px 0 0 0 #66afe9, inset -4px 0 0 0 #66afe9;
+  -moz-box-shadow: inset 4px 0 0 0 #66afe9, inset -4px 0 0 0 #66afe9;
+  box-shadow: inset 4px 0 0 0 #66afe9, inset -4px 0 0 0 #66afe9;
+  background-color: rgba(102, 175, 233, 0.25);
+  padding: 5px 10px 5px 15px;
+}
+.tt-cursor,
+.tt-cursor:nth-child(2n) {
+  -webkit-box-shadow: inset 4px 0 0 0 #66afe9, inset -4px 0 0 0 #66afe9;
+  -moz-box-shadow: inset 4px 0 0 0 #66afe9, inset -4px 0 0 0 #66afe9;
+  box-shadow: inset 4px 0 0 0 #66afe9, inset -4px 0 0 0 #66afe9;
+  background-color: rgba(102, 175, 233, 0.25);
+  padding: 5px 10px 5px 15px;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 .empty-message {
   -webkit-transition: all 0.1s ease-in-out;
