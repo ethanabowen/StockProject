@@ -3,11 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
+        <title>Stock Project</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
 
         <link rel="stylesheet" href="css/normalize.css">
@@ -18,7 +17,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     </head>
-    <body ng-app="StockProject">
+    <body ng-app="myApp">
         <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
             your browser</a> to improve your experience.</p>
@@ -27,7 +26,7 @@
         <!-- Add your site or application content here -->
 
         <!-- <div ng-include="'templates/header.html'"></div> -->
-        <div class="main" id="viewport">
+        <div class="main" id="viewport" ng-controller="myController">
             <div id="omnibar">
                 <div class="container">
                     <div class="row">
@@ -39,10 +38,25 @@
                         <div class="col-md-12">
                             <div class="input-group" id="omni-group">
                                 <input type="text" class="form-control typeahead" id="omni-input" placeholder="Search for NASDAQ Tickers...">
-                                <span class="input-group-btn"><button class="btn btn-default" id="button-go" type="button" onclick="search()">Go!</button></span>
+                                <span class="input-group-btn"><button class="btn btn-default" id="button-go" type="button" ng-click="doLogin()">Go!</button></span>
                             </div>
                         </div>
                     </div>
+                    <div class="row text-center">
+                        <div class="col-md-12" ng-repeat="thing in things">
+                            <div class="col-md-12">
+                                <a href="{{ thing.Link }}">{{ thing.Title }}</a>
+                            </div>
+                            <div class="col-md-12">
+                                {{ thing.Cite }}
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="row text-center stocks" ng-repeat="stock in stockData.Stocks">-->
+                        <!--<div class="col-md-6 col-md-offset-3 stock-holder">-->
+                            <!--<stock-info info="stock"></stock-info>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>
@@ -57,6 +71,8 @@
         <script src="js/typeahead/typeahead.bundle.js"></script>
         <script src="js/typeahead/typeahead.jquery.js"></script>
         <script src="js/Omnibar.js"></script>
+        <script src="js/directives/stockInfo.js"></script>
+
     <script>
         var url = 'http://finance.yahoo.com/q/h?s=';
         function search() {
