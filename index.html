@@ -38,7 +38,7 @@
                         <div class="col-md-12">
                             <div class="input-group" id="omni-group">
                                 <input type="text" class="form-control typeahead" id="omni-input" placeholder="Search for NASDAQ Tickers...">
-                                <span class="input-group-btn"><button class="btn btn-default" id="button-go" type="button" ng-click="doLogin()">Go!</button></span>
+                                <span class="input-group-btn"><button class="btn btn-default" id="button-go" type="button" onclick=doSearch()>Go!</button></span>
                             </div>
                         </div>
                     </div>
@@ -79,6 +79,22 @@
             var input = $("#omni-input").val();
             var ticker = input.substr(0,input.indexOf("|"));
             window.location.href = url + ticker;
+        }
+        function doSearch() {
+            var input = $("#omni-input").val();
+            var ticker = input.substr(0,input.indexOf("|"));
+            var ajax = $.ajax({
+                url: 'simpleGet',
+                type: 'GET',
+                dataType: 'html',
+                data: { "ticker" : ticker },
+                success: function (resultSet) {
+                    //window.location.href = resultSet;
+                    console.log("Success!");
+                    $('#viewport').html(resultSet);
+                },
+                error: console.log("Error in simpleGet")
+            });
         }
     </script>
     </body>
