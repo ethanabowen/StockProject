@@ -6861,10 +6861,94 @@ fieldset[disabled] .twitter-typeahead .tt-input {
   margin-right: -30px;
   margin-left: -15px;
 }
-.stock-holder {
+.stock-group {
+  margin-bottom: 20px;
+}
+.stock-site-holder {
+  padding-left: 0;
+  padding-right: 0;
   margin-top: 20px;
-  border-radius: 0;
-  border: 1px solid rgba(0, 128, 0, 0.1);
+  border-radius: 4px;
+  border: 1px solid rgba(102, 175, 233, 0.1);
+  border-top: none;
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 12px -6px rgba(0, 0, 0, 0.175);
+  -moz-box-shadow: 0 2px 12px -6px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 2px 12px -6px rgba(0, 0, 0, 0.175);
+}
+.stock-site-holder a {
+  display: block;
+}
+.stock-site-holder:hover {
+  background-color: rgba(102, 175, 233, 0.4);
+  cursor: pointer;
+  border-color: transparent;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+.stock-site-ticker {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  line-height: 22px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  background-color: transparent;
+  -webkit-box-shadow: 0 4px 12px -5px rgba(0, 0, 0, 0.175);
+  -moz-box-shadow: 0 4px 12px -5px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 4px 12px -5px rgba(0, 0, 0, 0.175);
+  border: 1px solid rgba(102, 175, 233, 0.05);
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.6);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.6)), to(rgba(255, 255, 255, 0.4)));
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));
+  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));
+  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));
+}
+.stock-site-company {
+  font-size: 18px;
+  font-weight: normal;
+  color: #555;
+}
+.stock-site-title {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  line-height: 16px;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: bold;
+  background-color: transparent;
+}
+.stock-site-footer {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  line-height: 14px;
+  font-size: 14px;
+  color: #333;
+  background-color: transparent;
+  font-style: italic;
+  -webkit-box-shadow: 2px -2px 12px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 2px -2px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 2px -2px 12px rgba(0, 0, 0, 0.05);
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.2);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.2)), to(rgba(255, 255, 255, 0.4)));
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
+  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
+  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
 }
 /* ==========================================================================
    Helper classes

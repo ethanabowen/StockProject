@@ -15,55 +15,70 @@ app.config([
 ]);
 (function () {
 
-    var scrapeService = function ($http) {
+    var myController = function ($scope) {
+        $scope.doSearch = function() {
+            var input = $("#omni-input").val();
+            var ticker = input.substr(0,input.indexOf(" | "));
+            var company = input.substr(input.indexOf("|")+1,input.length).trim();
 
-        return {
+            var numStocks = 4; // controls number of stocks returned
 
-            getThings: function (ticker) {
+            var ajax = $.ajax({
+                url: 'simpleGet',
+                type: 'GET',
+                dataType: 'html',
+                data: { "ticker" : ticker },
+                success: function (resultSet) {
 
-                var parseThings = function (response) {
-
+                    // TODO implement different system than doc.implement - doesn't work in FF
                     var tmp = document.implementation.createHTMLDocument();
-                    tmp.body.innerHTML = response.data;
-
+                    tmp.body.innerHTML = resultSet;
                     var items = $(tmp.body.children).find('.mod ul li');
 
+                    if (items.length == 0) {
+                        $scope.$apply(function() {
+                            $scope.things = things;
+                        });
+                        return;
+                    }
                     var things = [];
-                    for (var i = 0; i < items.length; i++) {
+
+                    for (var i = 0; i < numStocks; i++) {
+
+                        var title = $(items[i]).children('a')[0].innerText;
+                        var link = $(items[i]).children('a')[0].href;
+                        var cite = $(items[i]).children('cite')[0].innerText;
+                        cite = $.trim(cite.substr(0, cite.indexOf("(")));
+                        //TODO Implement regex for grabbing only the part of citeDate between a pair of parentheses
+                        var citeDate = $(items[i]).find('span')[0].innerText;
+
                         var thing = {
-                            Title: $(items[i]).children('a')[0].innerText,
-                            Link: $(items[i]).children('a')[0].href,
-                            Cite: $(items[i]).children('cite')[0].innerText
+                            Ticker: ticker,
+                            Company: company,
+                            Title: title,
+                            Link: link,
+                            Cite: cite,
+                            CiteDate: citeDate
                         };
                         things.push(thing);
                     }
-                    return things;
-                }
-                return $http.get('http://finance.yahoo.com/q/h?s='+ticker).then(parseThings);
-            }
-        }
-    };
-
-    var myController = function ($scope, $http, scrapeService) {
-
-        $scope.doLogin = function () {
-            var ticker = $("#omni-input").val();
-            ticker = ticker.substr(0,ticker.indexOf(" "));
-
-            scrapeService.getThings(ticker).then(
-                function (response) {
-                    $scope.things = response;
-                });
-        }
+                    // updates the angular $scope.things so it can process the links into the view
+                    $scope.$apply(function() {
+                        $scope.things = things;
+                    });
+                },
+                error: console.log("Error in simpleGet")
+            });
+        };
     };
 
     var myApp = angular.module('myApp', []);
-
-    myApp.config(function ($httpProvider) {
-        $httpProvider.defaults.withCredentials = false;
+    myApp.config(function ($httpProvider) {});
+    myApp.controller('myController', ['$scope', '$http', myController]);
+    myApp.directive('stockLinks', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/stockLinks.html'
+        };
     });
-
-    myApp.factory('scrapeService', ['$http', scrapeService]);
-    myApp.controller('myController', ['$scope', '$http', 'scrapeService', myController]);
-
 })();

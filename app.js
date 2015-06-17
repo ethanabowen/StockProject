@@ -19,19 +19,15 @@ app.get('/', function (req, res) {
 
 app.get('/simpleGet', function (req, res) {
     console.log('Server - Simple Get Triggered');
+
     // input value from search
-    var val = req.query.ticker.trim();//console.log(val);
-    console.log(val);
+    var val = req.query.ticker.trim();
+
     // url used to search yql
     var url = "http://finance.yahoo.com/q/h?s=" + val;
-    console.log(url);
 
 // request module is used to process the yql url and return the results in JSON format
     request(url, function(err, resp, body) {
-        //console.log(body);
         res.send(body);
     });
-
 });
-
-

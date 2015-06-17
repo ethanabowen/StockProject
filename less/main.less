@@ -37,6 +37,14 @@ body {
   -ms-transition: @prop @time @ease;
   transition: @prop @time @ease;
 }
+.gradient (@startColor: #fff, @endColor: #eee) {
+  background-color: @startColor;
+  background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+  background: -webkit-linear-gradient(top, @startColor, @endColor);
+  background: -moz-linear-gradient(top, @startColor, @endColor);
+  background: -ms-linear-gradient(top, @startColor, @endColor);
+  background: -o-linear-gradient(top, @startColor, @endColor);
+}
 
 
 
@@ -49,6 +57,21 @@ body {
   -webkit-box-shadow: @string1,@string2;
   -moz-box-shadow:    @string1,@string2;
   box-shadow:         @string1,@string2;
+}
+.box-shadow (@string1,@string2,@string3) {
+  -webkit-box-shadow: @string1,@string2,@string3;
+  -moz-box-shadow:    @string1,@string2,@string3;
+  box-shadow:         @string1,@string2,@string3;
+}
+.box-shadow (@string1,@string2,@string3,@string4) {
+  -webkit-box-shadow: @string1,@string2,@string3,@string4;
+  -moz-box-shadow:    @string1,@string2,@string3,@string4;
+  box-shadow:         @string1,@string2,@string3,@string4;
+}
+.box-shadow (@string1,@string2,@string3,@string4,@string5) {
+  -webkit-box-shadow: @string1,@string2,@string3,@string4,@string5;
+  -moz-box-shadow:    @string1,@string2,@string3,@string4,@string5;
+  box-shadow:         @string1,@string2,@string3,@string4,@string5;
 }
 
 a, a:visited, a:hover, a:active, a:focus {
@@ -522,11 +545,83 @@ fieldset[disabled] .twitter-typeahead .tt-input {
     margin-left:-15px;
   }
 }
-
-.stock-holder{
+.stock-group{
+  margin-bottom: 20px;
+}
+.stock-site-holder{
+  padding-left:0;
+  padding-right:0;
   margin-top: 20px;
-  border-radius: 0;
-  border: 1px solid fadeout(green,90%)
+  border-radius: 4px;
+  border: 1px solid fadeout(@focus-color,90%);
+  border-top: none;
+  background-color: #fff;
+  .box-shadow(0 2px 12px -6px rgba(0,0,0,0.175));
+  & a{
+    display:block;
+  }&:hover{
+//      .box-shadow(inset 4px 0 0 0 fadeout(@focus-color,50%),inset -4px 0 0 0 fadeout(@focus-color,50%),inset 0 4px 0 0 fadeout(@focus-color,50%),inset 0 -4px 0 0 fadeout(@focus-color,50%),0 6px 12px rgba(18, 18, 36, 0.17));
+//      .box-shadow(0 6px 12px rgba(18, 18, 36, 0.17));
+      background-color:fadeout(@focus-color,60%);
+      cursor: pointer;
+      border-color: transparent;
+      .transition();
+   }
+}
+.stock-site-ticker {
+  padding-left:0;
+  padding-right:0;
+  padding-top:5px;
+  padding-bottom:5px;
+  line-height: 22px;
+  font-size:22px;
+  font-weight: bold;
+  color: #333;
+  background-color: transparent;
+  .box-shadow(0 4px 12px -5px rgba(0,0,0,0.175));
+  border: 1px solid fadeout(@focus-color,95%);
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+.gradient(rgba(255, 255, 255, 0.6),rgba(255, 255, 255, 0.4));
+}
+.stock-site-company{
+  font-size:18px;
+  font-weight: normal;
+  color: #555;
+}
+.stock-site-title{
+  padding-left:5px;
+  padding-right:5px;
+  padding-top:5px;
+  padding-bottom:5px;
+  line-height: 16px;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: bold;
+  background-color: transparent;
+}
+.stock-site-footer{
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  line-height: 14px;
+  font-size: 14px;
+  color: #333;
+  background-color: transparent;
+  font-style: italic;
+  .box-shadow(2px -2px 12px rgba(0,0,0,0.05));
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  .gradient(rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.4));
+}
+.stock-site-cite{
+
+  &-date{
+
+  }
+}
+.stock-site-link{
 
 }
 /* ==========================================================================
