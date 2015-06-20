@@ -5,3 +5,5 @@
 *.psd
 node_modules
 node_modules/*
+mongodb_data
+mongodb_data/*
