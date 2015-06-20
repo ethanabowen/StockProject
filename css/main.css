@@ -6352,7 +6352,6 @@ html {
 body {
   text-rendering: optimizeLegibility;
   background-color: #ffffff;
-  height: 100%;
   margin: 0;
 }
 a,
@@ -6521,6 +6520,22 @@ button#button-go {
 button#button-go:focus {
   color: #fff;
   text-align: left;
+}
+/* Navbar */
+.navbar {
+  z-index: 9999;
+}
+.navbar-brand > img {
+  height: 25px;
+  width: auto;
+}
+.btn-default {
+  -webkit-transition: background 0.1s ease-in-out;
+  -moz-transition: background 0.1s ease-in-out;
+  -o-transition: background 0.1s ease-in-out;
+  -ms-transition: background 0.1s ease-in-out;
+  transition: background 0.1s ease-in-out;
+  color: #238cdf;
 }
 /* ==========================================================================
    TypeAhead & Bloodhound
@@ -6953,6 +6968,15 @@ fieldset[disabled] .twitter-typeahead .tt-input {
   background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
   background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
   background: -o-linear-gradient(top, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
+}
+.stock_stock-chart {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+.stock_stock-data {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+.stock_stock-news-yahoo {
+  background-color: fadout(purple, 50%);
 }
 /* ==========================================================================
    Helper classes
