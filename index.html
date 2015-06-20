@@ -103,6 +103,41 @@
 //                error: console.log("Error in simpleGet")
 //            });
 //        }
+/*        function doMongoSearch() {
+            var input = $("#omni-input").val();
+            var ticker = input.substr(0,input.indexOf("|"));
+            var ajax = $.ajax({
+                url: 'simpleGet',
+                type: 'GET',
+                dataType: 'html',
+                data: { "ticker" : ticker },
+                success: function (resultSet) {
+                    //window.location.href = resultSet;
+                    //var tmp = document.implementation.createHTMLDocument();
+                    //tmp.body.innerHTML = resultSet;
+
+                    //var items = $(tmp.body.children).find('.mod ul li');
+                    var items = JSON.parse(resultSet);
+
+                    var things = [];
+                    for (var i = 0; i < items.length; i++) {
+                        var thing = {
+                            Title: items[i].title,
+                            Link: items[i].url,
+                            Cite: ''
+                        };
+                        things.push(thing);
+                    }
+                    $scope.$apply(function() {
+                        $scope.things = things;
+                    });
+
+                    console.log(things.length);
+//                  $('#viewport').html(resultSet);
+                },
+                error: console.log("Error in simpleGet")
+            });
+        }*/
     </script>
     </body>
 </html>

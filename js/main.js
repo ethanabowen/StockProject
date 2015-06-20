@@ -26,14 +26,14 @@ app.config([
             var ajax = $.ajax({
                 url: 'simpleGet',
                 type: 'GET',
-                dataType: 'html',
+                dataType: 'json',
                 data: { "ticker" : ticker },
                 success: function (resultSet) {
-
+                    var items = resultSet.Articles;
                     // TODO implement different system than doc.implement - doesn't work in FF
-                    var tmp = document.implementation.createHTMLDocument();
-                    tmp.body.innerHTML = resultSet;
-                    var items = $(tmp.body.children).find('.mod ul li');
+                    //var tmp = document.implementation.createHTMLDocument();
+                    //tmp.body.innerHTML = resultSet;
+                    //var items = $(tmp.body.children).find('.mod ul li');
 
                     if (items.length == 0) {
                         $scope.$apply(function() {
@@ -41,16 +41,21 @@ app.config([
                         });
                         return;
                     }
+
                     var things = [];
-
+                    if(items.length < 4) {
+                        numStocks = items.length;
+                    }
                     for (var i = 0; i < numStocks; i++) {
-
-                        var title = $(items[i]).children('a')[0].innerText;
-                        var link = $(items[i]).children('a')[0].href;
-                        var cite = $(items[i]).children('cite')[0].innerText;
-                        cite = $.trim(cite.substr(0, cite.indexOf("(")));
+                        //var title = $(items[i]).children('a')[0].innerText;
+                        //var link = $(items[i]).children('a')[0].href;
+                        //var cite = $(items[i]).children('cite')[0].innerText;
+                        var title = items[i].title;
+                        var link = items[i].url;
+                        var cite = 'NoneForNow';
+                        //cite = $.trim(cite.substr(0, cite.indexOf("(")));
                         //TODO Implement regex for grabbing only the part of citeDate between a pair of parentheses
-                        var citeDate = $(items[i]).find('span')[0].innerText;
+                        var citeDate = 'NoneForNow';
 
                         var thing = {
                             Ticker: ticker,
