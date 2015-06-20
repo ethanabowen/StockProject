@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/ethanabowen/StockProject/issues"
   },
-  "homepage": "https://github.com/ethanabowen/StockProject#readme"
+  "homepage": "https://github.com/ethanabowen/StockProject#readme",
+  "dependencies": {
+    "ejs": "^2.3.1",
+    "express": "^4.12.4",
+    "mongoose": "^4.0.5",
+    "request": "^2.58.0"
+  }
 }
