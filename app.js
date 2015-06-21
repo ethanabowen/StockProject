@@ -16,12 +16,12 @@ var db = mongoose.connect('mongodb://localhost:27017/Stocks').connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('open', function (cb) { console.log('Connected to MongoDB: Stocks')});
 
-var stockSchema = mongoose.Schema(
+/*var stockSchema = mongoose.Schema(
     { ticker: String,
         Articles: [{ url: String, title: String, date: String, weight: Number}],
         last_updated: ""
     });
-var stockModel = mongoose.model('Articles', stockSchema);
+var stockModel = mongoose.model('Articles', stockSchema);*/
 var collection = db.collection('Articles');
 app.get('/', function (req, res) {
   res.render('index.html', {
@@ -37,12 +37,13 @@ app.get('/simpleGet', function (req, res) {
 
     // url used to search yql
     //var url = "http://finance.yahoo.com/q/h?s=" + val;
-    collection.findOne( {'ticker': val}, function(err, docs) {
+    collection.find( {'ticker': val}).each(function(err, docs) {
         //{ 'ticker' : val}
         if(err != null)
-            console.log(err);
-        console.log(docs);
-        res.send(docs);
+            console.log("ERROR:" + err);
+        console.log("DOCS:" + docs);
+        if(docs != null)
+            res.send(docs)
     });
     //console.log(resultFromMongo);
 // request module is used to process the yql url and return the results in JSON format

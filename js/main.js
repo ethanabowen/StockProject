@@ -29,13 +29,13 @@ app.config([
                 dataType: 'json',
                 data: { "ticker" : ticker },
                 success: function (resultSet) {
-                    var items = resultSet.Articles;
+                    var item = resultSet;
                     // TODO implement different system than doc.implement - doesn't work in FF
                     //var tmp = document.implementation.createHTMLDocument();
                     //tmp.body.innerHTML = resultSet;
                     //var items = $(tmp.body.children).find('.mod ul li');
 
-                    if (items.length == 0) {
+                    if (item.length == 0) {
                         $scope.$apply(function() {
                             $scope.things = things;
                         });
@@ -43,20 +43,14 @@ app.config([
                     }
 
                     var things = [];
-                    if(items.length < 4) {
-                        numStocks = items.length;
-                    }
-                    for (var i = 0; i < numStocks; i++) {
-                        //var title = $(items[i]).children('a')[0].innerText;
-                        //var link = $(items[i]).children('a')[0].href;
-                        //var cite = $(items[i]).children('cite')[0].innerText;
 
-                        var title = items[i].title;
-                        var link = items[i].url;
-                        var cite = items[i].cite;
+                    //if($scope.controller.count < 4) {
+                        var title = item.title;
+                        var link = item.url;
+                        var cite = item.cite;
                         //cite = $.trim(cite.substr(0, cite.indexOf("(")));
                         //TODO Implement regex for grabbing only the part of citeDate between a pair of parentheses
-                        var citeDate = items[i].date;
+                        var citeDate = item.date;
 
                         var thing = {
                             Ticker: ticker,
@@ -67,11 +61,12 @@ app.config([
                             CiteDate: citeDate
                         };
                         things.push(thing);
-                    }
-                    // updates the angular $scope.things so it can process the links into the view
-                    $scope.$apply(function() {
-                        $scope.things = things;
-                    });
+
+                        // updates the angular $scope.things so it can process the links into the view
+                        $scope.$apply(function () {
+                            $scope.things = things;
+                        });
+                   // }
                 },
                 error: console.log("Error in simpleGet")
             });
