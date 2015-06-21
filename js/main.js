@@ -50,16 +50,17 @@ app.config([
                         //var title = $(items[i]).children('a')[0].innerText;
                         //var link = $(items[i]).children('a')[0].href;
                         //var cite = $(items[i]).children('cite')[0].innerText;
+
                         var title = items[i].title;
                         var link = items[i].url;
-                        var cite = 'NoneForNow';
+                        var cite = items[i].cite;
                         //cite = $.trim(cite.substr(0, cite.indexOf("(")));
                         //TODO Implement regex for grabbing only the part of citeDate between a pair of parentheses
-                        var citeDate = 'NoneForNow';
+                        var citeDate = items[i].date;
 
                         var thing = {
                             Ticker: ticker,
-                            Company: company,
+                            //Company: company,
                             Title: title,
                             Link: link,
                             Cite: cite,
