@@ -16,24 +16,30 @@ articles = db.Articles
 #Query site for HTML
 ticker = sys.argv[1]
 #ticker = "TASR"
-sourceSite = 'Yahoo'
-url = 'http://finance.yahoo.com/q/h?s=' + ticker
+sourceSite = 'Google'
+url = 'https://www.google.com/finance/company_news?q=NASDAQ%3A' + ticker
+#nyseurl = 'https://www.google.com/finance/company_news?q=NYSE%3A' + ticker
 print(url)
 response = urllib.request.urlopen(url)
-
+html = ''
+for line in response.fp:
+    html += line.decode('utf-8')
+#print(html)
 #Parse and store Article information from Yahoo
 htmlArticles = []
-soup = BeautifulSoup(response)
-ul = soup.find('div', { 'class' : 'mod yfi_quote_headline withsky'})
-for q in ul.find_all('ul'): #All articles for a day
+soup = BeautifulSoup(html)
+ul = soup.find('div', { 'class' : 'sfe-break-right'})
+for q in ul.find_all('div', { 'class' : 'g-section news sfe-break-bottom-16' } ): #All articles for a day
     #print("q\t",q)
-    w = q.find('li') #First li
-    while(w is not None): #Iterate through each article
+    #w = q.find('li') #First li
+    w = q
+    while(w is not None and hasattr(w, 'a')): #Iterate through each article
         #print("w\t",w)
         title = w.a.string
         link = w.a['href']
-        cite = w.cite.text.replace(w.cite.span.text, '')
-        date = w.cite.span.text
+        citeSoup = w.find('div', { 'class' : 'byline' })
+        cite = citeSoup.span.text
+        date = citeSoup.text.replace(citeSoup.span.text, '')
         article = [title, link, cite, date]
         htmlArticles.append(article)
         w = w.next_sibling #Next Article
@@ -49,7 +55,7 @@ for article in htmlArticles:
     jsonArticle['source'] = sourceSite
     jsonArticle['weight'] = "0"
     jsonArticle['createTimeInMillis'] = datetime.now().microsecond
-
+    #print(jsonArticle,'\n')
     articles.update({ 'ticker': ticker, 'url' : jsonArticle['url'] }, jsonArticle , upsert=True) #Insert into Mongo
 
 #Document, in the form of a Python dictionary....it's just JSON...
