@@ -32,22 +32,10 @@ app.get('/', function (req, res) {
 app.get('/simpleGet', function (req, res) {
     console.log('Server - Simple Get Triggered');
 
-    // input value from search
-    var val = req.query.ticker.trim();
-
-    // url used to search yql
-    //var url = "http://finance.yahoo.com/q/h?s=" + val;
-    collection.find( {'ticker': val}).each(function(err, docs) {
-        //{ 'ticker' : val}
-        if(err != null)
-            console.log("ERROR:" + err);
-        console.log("DOCS:" + docs);
-        if(docs != null)
-            res.send(docs)
-    });
-    //console.log(resultFromMongo);
-// request module is used to process the yql url and return the results in JSON format
-    //request(url, function(err, resp, body) {
-//        res.send(body);
-//    });
+    var val = req.query.ticker.trim(); // input value from search
+    collection.find({ 'ticker' : val },{limit:5, sort: [['_id',-1]]}).toArray(function(e, results){
+        //if (e) return next(e)
+        ///console.dir(e, results)
+        res.send(results)
+    })
 });

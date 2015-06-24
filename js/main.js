@@ -29,13 +29,13 @@ app.config([
                 dataType: 'json',
                 data: { "ticker" : ticker },
                 success: function (resultSet) {
-                    var item = resultSet;
+                    var items = resultSet;
                     // TODO implement different system than doc.implement - doesn't work in FF
                     //var tmp = document.implementation.createHTMLDocument();
                     //tmp.body.innerHTML = resultSet;
                     //var items = $(tmp.body.children).find('.mod ul li');
 
-                    if (item.length == 0) {
+                    if (items.length == 0) {
                         $scope.$apply(function() {
                             $scope.things = things;
                         });
@@ -43,8 +43,8 @@ app.config([
                     }
 
                     var things = [];
-
-                    //if($scope.controller.count < 4) {
+                    items.forEach(function(item){
+                        //if($scope.controller.count < 4) {
                         var title = item.title;
                         var link = item.url;
                         var cite = item.cite;
@@ -61,7 +61,7 @@ app.config([
                             CiteDate: citeDate
                         };
                         things.push(thing);
-
+                    });
                         // updates the angular $scope.things so it can process the links into the view
                         $scope.$apply(function () {
                             $scope.things = things;
